@@ -16,7 +16,7 @@ def receive_data():
             break
 
 def update():
-    global offset, collision, movement, score, life, data, t0, movement, movement_counter
+    global offset, collision, movement, score, life, data, t1, movement, movement_counter
 
     #Variable setting
     acceleration = score / 10000000
@@ -43,10 +43,12 @@ def update():
                         case "RIGHT":
                             if movement_counter < 20:
                                 player.x += 0.4
+                                player.rotation_z += 18
                                 movement_counter += 1
                         case "LEFT":
                             if movement_counter < 20:
                                 player.x -= 0.4
+                                player.rotation_z -= 18
                                 movement_counter += 1
                         case "UP":
                             if movement_counter < 20:
@@ -63,17 +65,19 @@ def update():
                     movement = ""
                     movement_counter = 0
             else:
-                t1 = time.time()
-                if obj['motion'] == "RIGHT" and player.x < 8 and t1 - t0 >= 0.4:
+                t0 = time.time()
+                if obj['motion'] == "RIGHT" and player.x < 8 and t0 - t1 >= 0.4:
                     movement = "RIGHT"
-                    t0 = time.time()
-                if obj['motion'] == "LEFT" and player.x > -8 and t1 - t0 >= 0.4:
+                    t1 = time.time()
+                if obj['motion'] == "LEFT" and player.x > -8 and t0 - t1 >= 0.4:
                     movement = "LEFT"
-                    t0 = time.time()
-                if obj['motion'] == "UP" and player.y == 1:
+                    t1 = time.time()
+                if obj['motion'] == "UP" and player.y == 1 and t0 - t1 >= 0.25:
                     movement = "UP"
-                if obj['motion']  == "DOWN":
+                    t1 = time.time()
+                if obj['motion']  == "DOWN" and t0 - t1 >= 0.25:
                     movement = "DOWN"
+                    t1 = time.time()
         except json.JSONDecodeError:
             pass
     camera.position = (player.x, 6, -125)
@@ -248,7 +252,7 @@ print("Connected at", addr)
 # Start a separate thread for data reception
 threading.Thread(target=receive_data, daemon=True).start()
 
-t0 = time.time()
+t1 = time.time()
 
 app.run()
 running = False
