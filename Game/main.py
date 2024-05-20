@@ -16,7 +16,16 @@ def receive_data():
             break
 
 def update():
-    global offset, collision, movement, score, life, data, t0
+    global offset, collision, movement, score, life, data, t0, movement, movement_counter
+
+    #Variable setting
+    acceleration = score / 10000000
+    score += 1 / 10
+    player_speed = time.dt * 0.15
+    offset += player_speed + acceleration
+    train_speed = [time.dt * 0.45, time.dt * 0.25]
+    train_spawn = [2, 1.2]
+    gravity = 0.05
 
     #Recieve data
     if data:
@@ -28,29 +37,42 @@ def update():
                     choose += 1
                 data = buffer_data[choose] + '}'
             obj = json.loads(data)
-            t1 = time.time()
-            if obj['motion'] == "RIGHT" and player.x < 8 and t1 - t0 >= 0.6:
-                player.x += 8
-                t0 = time.time()
-            if obj['motion'] == "LEFT" and player.x > -8 and t1 - t0 >= 0.6:
-                player.x -= 8
-                t0 = time.time()
-            if obj['motion'] == "UP" and player.y == 1:
-                player.y = 6
-            if obj['motion']  == "DOWN":
-                player.y = 1
+            if movement != "":
+                if movement_counter < 20:
+                    match movement:
+                        case "RIGHT":
+                            if movement_counter < 20:
+                                player.x += 0.4
+                                movement_counter += 1
+                        case "LEFT":
+                            if movement_counter < 20:
+                                player.x -= 0.4
+                                movement_counter += 1
+                        case "UP":
+                            if movement_counter < 20:
+                                player.y += 0.3
+                                movement_counter += 1
+                        case "DOWN":
+                            gravity = 0.2
+                            movement = ""
+                else:
+                    movement = ""
+                    movement_counter = 0
+            else:
+                t1 = time.time()
+                if obj['motion'] == "RIGHT" and player.x < 8 and t1 - t0 >= 0.6:
+                    movement = "RIGHT"
+                    t0 = time.time()
+                if obj['motion'] == "LEFT" and player.x > -8 and t1 - t0 >= 0.6:
+                    movement = "LEFT"
+                    t0 = time.time()
+                if obj['motion'] == "UP" and player.y == 1:
+                    movement = "UP"
+                if obj['motion']  == "DOWN":
+                    movement = "DOWN"
         except json.JSONDecodeError:
             pass
     camera.position = (player.x, 6, -125)
-
-    #Variable setting
-    acceleration = score / 10000000
-    score += 1 / 10
-    player_speed = time.dt * 0.15
-    offset += player_speed + acceleration
-    train_speed = [time.dt * 0.45, time.dt * 0.25]
-    train_spawn = [2, 1.2]
-    gravity = 0.05
     
     setattr(rail0, "texture_offset", (0, offset))
     setattr(rail1, "texture_offset", (0, offset))
@@ -185,7 +207,8 @@ running = True
 conn = socket.socket()
 offset = 0
 collision = False
-movement = 0
+movement = ""
+movement_counter = 0
 score = 0
 life = 3
 
