@@ -39,7 +39,7 @@ void my_wifi_sender::connect_host(){
     printf("connected to host successfully!\n");
 }
 
-void my_wifi_sender::send_motion(char* motion){
+void my_wifi_sender::send_motion(const char* motion){
     int len = sprintf(buffer,"{\"motion\":%s}", motion);
     nsapi_error_t response = socket.send(buffer,len);
     if(response <= 0){
