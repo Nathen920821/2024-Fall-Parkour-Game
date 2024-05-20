@@ -47,7 +47,7 @@ class my_wifi_sender{
         /*
          *send motion to game server with a single pair json format
          */
-        void send_motion(char* motion);
+        void send_motion(const char* motion);
 
     private:
         ISM43362Interface _wifi;
