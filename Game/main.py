@@ -54,16 +54,20 @@ def update():
                                 movement_counter += 1
                         case "DOWN":
                             gravity = 0.2
-                            movement = ""
+                            movement_counter += 1
+                            if player.y <= 1:
+                                player.y = 1
+                                movement = ""
+                                movement_counter = 0
                 else:
                     movement = ""
                     movement_counter = 0
             else:
                 t1 = time.time()
-                if obj['motion'] == "RIGHT" and player.x < 8 and t1 - t0 >= 0.6:
+                if obj['motion'] == "RIGHT" and player.x < 8 and t1 - t0 >= 0.4:
                     movement = "RIGHT"
                     t0 = time.time()
-                if obj['motion'] == "LEFT" and player.x > -8 and t1 - t0 >= 0.6:
+                if obj['motion'] == "LEFT" and player.x > -8 and t1 - t0 >= 0.4:
                     movement = "LEFT"
                     t0 = time.time()
                 if obj['motion'] == "UP" and player.y == 1:
@@ -214,11 +218,12 @@ life = 3
 
 Score = Text(x=0.4, y=0.3)
 Life = Text(x=0.4, y=0.32)
-sky = Sky()
 
 rail0 = Rail((0, 0, 0))
 rail1 = Rail((-8, 0, 0))
 rail2 = Rail((8, 0, 0))
+
+sky = Entity(model = "cube", texture = "assets/sky.jpg", scale = (100, 1200, 0.0001), parent = rail0, z = 1.5, y = 0.2)
 
 train1 = Train((1, 1.2, .2), 0)
 train2 = Train((-1, 1.2, .2), 180)
