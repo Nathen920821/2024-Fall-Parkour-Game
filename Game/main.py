@@ -37,6 +37,7 @@ def update():
                     choose += 1
                 data = buffer_data[choose] + '}'
             obj = json.loads(data)
+            print(data)
             if movement != "":
                 if movement_counter < 20:
                     match movement:
@@ -64,6 +65,7 @@ def update():
                 else:
                     movement = ""
                     movement_counter = 0
+                    data = ""
             else:
                 t0 = time.time()
                 if obj['motion'] == "RIGHT" and player.x < 8 and t0 - t1 >= 0.4:
@@ -103,9 +105,9 @@ def update():
     #Life and Score
     Score.text = f'Score : {int(score)}'
     Life.text = f'Life  : {life}'
-    if life <= 0:
-        print('score:', {score})
-        quit()
+    #if life <= 0:
+    #    print('score:', {score})
+    #    quit()
 
     #Gravity
     if player.y > 1:
