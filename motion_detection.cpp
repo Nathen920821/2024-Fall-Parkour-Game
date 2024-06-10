@@ -153,11 +153,11 @@ void process_data() {
 }
 
 void motion_detection(float stm_x, float stm_y, float stm_z, float stm_all_x, float stm_all_y, float stm_all_z) {
-    if (fabs(stm_x - stm_y) < 5 && fabs(stm_y - stm_z) < 5 && fabs(stm_z - stm_x) < 5) {
+    if (fabs(stm_x - stm_y) < 5 && fabs(stm_y - stm_z) < 5.5 && fabs(stm_z - stm_x) < 5.5) {
         // printf("STATIONARY\n");
     } else {
         if (stm_x > stm_y && stm_x > stm_z) {
-            if (t.read_ms() >= 300) {
+            if (t.read_ms() >= 400) {
                 if (stm_all_x < 0) {
                     printf("LEFT\n");
                     _wifi.send_motion("LEFT");
@@ -171,7 +171,7 @@ void motion_detection(float stm_x, float stm_y, float stm_z, float stm_all_x, fl
                 // printf("STATIONARY\n");
             }
         } else if (stm_z > stm_x && stm_z > stm_y) {
-            if (t.read_ms() >= 300) {
+            if (t.read_ms() >= 400) {
                 if (stm_all_z < 200) {
                     printf("DOWN\n");
                     _wifi.send_motion("DOWN");
