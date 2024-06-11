@@ -6,7 +6,7 @@ We designed a Parkour-like game similar to "Subway Surfers". But instead of cont
 
 ## Procedure
 ### Motion Detection Part
-First, go to the motion detection file. You'll need four files: "motion_detection.cpp", "motion_detection.h", "my_filter.cpp", and "my_filter.h". The former two are for motion detection, and the latter two are for filtering data.  
+First, go to the motion detection file. You'll need four files: "motion_detection.cpp", "motion_detection.h", "my_filter.cpp", and "my_filter.h". The former two are for motion detection, and the latter two are for data filtering.  
 ### Data Transfer Part
   
 ### Game Part
