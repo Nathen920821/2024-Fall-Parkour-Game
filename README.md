@@ -1,4 +1,4 @@
-# ESLAB-2024-Fall Parkour-like Game Design
+# ESLAB-2024-Spring Parkour-like Game Design
 Authors: B10901112 陳品翔、B10901156 柯育杰、B10901161 張梓安  
 
 ## Introduction
