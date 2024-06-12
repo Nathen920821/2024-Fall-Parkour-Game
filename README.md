@@ -11,7 +11,7 @@ First, you will need these files: ``main.cpp``, both ``motion_detection.cpp`` an
 ### Data Transfer Part
   
 ### Game Part
-First, open ``cmd/terminal`` and type ``pip install ursina`` to download Ursina.Then download the Game folder, or download the ``main.py`` and assests folder, and put them under a mutual folder.Then replace the IP address with your computer's IP address in line 268 in ``main.py``. After these steps you should able to execute ``main.py`` and enjoy this game.  
+First, open ``cmd/terminal`` and type ``pip install ursina`` to download Ursina.Then download the Game folder, or download the ``main.py`` and assests folder, and put them under a mutual folder. Then replace the IP address with your computer's IP address in line 268 in ``main.py``. After these steps you should able to execute ``main.py`` and enjoy this game.  
 
 ## Game Demo
 This is our demo video link:
