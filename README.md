@@ -57,7 +57,8 @@ GAMESERVERIP should be replaced with the IP address of host comupter.
 (Note that some times you have to shutdown your firewall or that the connection cannot be set up)
 ### Game Part
 First, open ``cmd/terminal`` and type ``pip install ursina`` to download Ursina.Then download the Game folder, or download the ``main.py`` and assests folder, and put them under a mutual folder. Then replace the IP address with your computer's IP address in line 268 in ``main.py``. After these steps you should able to execute ``main.py`` and enjoy this game.  
-
+###
+Game rules: Move the STM32 left, right, up, down and the character will follower the STM32 to do the corresponding motion. You have five lifes at the biginning, and your task is to dodge all kind of barriers such as trains, road blocks, and dragons(Notice that, dragon is 3 blocks wide, so you should move to the rightest or leftest rail to dodge it) and the speed will increase as your score get higher.There is an item looks like a white block with wings icom, if you get it you will fly to the sky for 5 second. Now, Try to earn more score before you are run over by train!
 ## Game Demo
 This is our demo video link:
 
