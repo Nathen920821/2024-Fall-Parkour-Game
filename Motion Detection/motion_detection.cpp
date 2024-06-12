@@ -1,9 +1,12 @@
+#include "mbed.h"
+#include "stm32l475e_iot01_accelero.h"
+#include <cmath>
+#include "my_filter.h"
+#include "my_wifi_sender.h"
 #include "motion_detection.h"
 
-// Timer to track the 0.4s duration
-Timer t;
-
-my_wifi_sender _wifi;
+extern Timer t; // Use the timer defined in main.cpp
+extern my_wifi_sender _wifi; // Use the WiFi sender defined in main.cpp
 
 void process_data() {
     // Buffer to hold the last 20 samples
@@ -18,11 +21,6 @@ void process_data() {
     while (true) {
         int16_t pDataXYZ[3] = {0};
         BSP_ACCELERO_AccGetXYZ(pDataXYZ);
-
-        // Calculate amplitude
-        // stm_all[0] = pDataXYZ[0];
-        // stm_all[1] = pDataXYZ[1];
-        // stm_all[2] = pDataXYZ[2];
 
         // Calculate difference from the previous sample
         if (bufferIndex > 0) {
@@ -89,19 +87,12 @@ void process_data() {
             stm_y = sqrt(varY / BUFFER_SIZE);
             stm_z = sqrt(varZ / BUFFER_SIZE);
 
-            // Print standard deviation values
-            // printf("Standard Deviation (10ms): X: %.2f, Y: %.2f, Z: %.2f\n", stm_x, stm_y, stm_z);
-
-            // Print amplitude values
-            // printf("Amplitude: X: %.2f, Y: %.2f, Z: %.2f\n", stm_all[0], stm_all[1], stm_all[2]);
-            // printf("Difference: X: %.2f, Y: %.2f, Z: %.2f\n", stm_diff[0], stm_diff[1], stm_diff[2]);
-
             // Motion detection
             motion_detection(stm_x, stm_y, stm_z, stm_all[0], stm_all[1], stm_all[2]);
         }
 
-        // Wait for 5 millisecond
-        wait_us(5000);
+        // Wait for 1 millisecond
+        wait_us(1000);
     }
 }
 
@@ -138,23 +129,5 @@ void motion_detection(float stm_x, float stm_y, float stm_z, float stm_all_x, fl
                 // printf("STATIONARY\n");
             }
         }
-    }
-}
-
-int main() {
-    _wifi.connect_wifi();
-    _wifi.print_wifi_info();
-    _wifi.connect_host();
-    
-    // Initialize accelerometer
-    BSP_ACCELERO_Init();
-
-    my_filter_init();
-    
-    t.start(); // Start the timer
-
-    while (true) {
-        // Main loop to process data
-        process_data();
     }
 }
