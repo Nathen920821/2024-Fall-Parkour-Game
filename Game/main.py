@@ -1,6 +1,5 @@
 import socket
 import json
-import numpy as np
 from ursina import *
 import random
 import threading
@@ -25,7 +24,7 @@ def update():
     offset += player_speed + acceleration
     train_speed = [time.dt * 0.45, time.dt * 0.25]
     train_spawn = [2, 1.2]
-    gravity = 0.05
+    gravity = 0.07
 
     #Recieve data
     if data:
@@ -76,6 +75,7 @@ def update():
                     t1 = time.time()
                 if obj['motion'] == "UP" and player.y == 1 and t0 - t1 >= 0.25:
                     movement = "UP"
+                    jump.play()
                     t1 = time.time()
                 if obj['motion']  == "DOWN" and t0 - t1 >= 0.25:
                     movement = "DOWN"
@@ -108,6 +108,8 @@ def update():
             fly_start = time.time()
             flying_item.position = (1 * random.randint(-1, 1), 5, random.uniform(4,6))
     if collision:
+        if player.color == color.white:
+            scream.play()
         player.rotation_x += time.dt * 400
         player.color = color.red
         if player.rotation_x >= 360:
@@ -132,9 +134,9 @@ def update():
     #Life and Score
     Score.text = f'Score : {int(score)}'
     Life.text = f'Life  : {life}'
-    #if life <= 0:
-    #    print('score:', {score})
-    #    quit()
+    if life <= 0:
+        print('score:', {score})
+        quit()
 
     #Gravity
     if player.y > 1:
@@ -275,7 +277,7 @@ fly = False
 movement = ""
 movement_counter = 0
 score = 0
-life = 3
+life = 5
 
 Score = Text(x=0.4, y=0.3)
 Life = Text(x=0.4, y=0.32)
@@ -318,6 +320,16 @@ threading.Thread(target=receive_data, daemon=True).start()
 
 t1 = time.time()
 fly_start = 0
+
+scream = Audio('assets/scream.mp3', autoplay=False, loop=False)
+jump = Audio('assets/jump.mp3', autoplay=False, loop=False)
+
+if random.choice([0, 1]) == 0:
+    bgm1 = Audio('assets/bgm1.mp3', loop=True)
+    bgm1.play()
+else:
+    bgm2 = Audio('assets/bgm2.mp3', loop=True)
+    bgm2.play()
 
 print("game start")
 
