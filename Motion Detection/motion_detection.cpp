@@ -100,7 +100,7 @@ void process_data() {
             motion_detection(stm_x, stm_y, stm_z, stm_all[0], stm_all[1], stm_all[2]);
         }
 
-        // Wait for 1 millisecond
+        // Wait for 5 millisecond
         wait_us(5000);
     }
 }
