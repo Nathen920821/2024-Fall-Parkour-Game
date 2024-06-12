@@ -101,7 +101,7 @@ void process_data() {
         }
 
         // Wait for 1 millisecond
-        wait_us(1000);
+        wait_us(5000);
     }
 }
 
