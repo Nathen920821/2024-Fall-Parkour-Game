@@ -5,18 +5,13 @@ Authors: B10901112 陳品翔、B10901156 柯育杰、B10901161 張梓安
 We designed a Parkour-like game similar to "Subway Surfers". But instead of controlling the role in the game by scrolling the screen, you have to move your body to control the role in the game. Please follow the procedure to set up the game in your own PC. If you have any problem, or want to know how the game was designed, refer to ``Report.pdf``.  
 
 ## Procedure
-First, you need to import the following library to Mbed studio project
-
-BSP: http://developer.mbed.org/teams/ST/code/BSP_B-L475E-IOT01/
-
-DSP: https://os.mbed.com/teams/mbed-official/code/mbed-dsp
-
-ism43362-driver: https://github.com/ARMmbed/wifi-ism43362/
-Second, find the file with following path in the project folder:
-
-mbed-dsp/CMSIS_dsp/TransformFunctions/arm_bitreversal2.S
-
-Before line 43, add the following line:
+First, you need to import the following library to Mbed studio project:  
+BSP: http://developer.mbed.org/teams/ST/code/BSP_B-L475E-IOT01/  
+DSP: https://os.mbed.com/teams/mbed-official/code/mbed-dsp  
+ism43362-driver: https://github.com/ARMmbed/wifi-ism43362/  
+Second, find the file with following path in the project folder:  
+mbed-dsp/CMSIS_dsp/TransformFunctions/arm_bitreversal2.S  
+Before line 43, add the following line:  
 ```
 #define __CC_ARM
 ```
