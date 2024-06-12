@@ -6,11 +6,17 @@ We designed a Parkour-like game similar to "Subway Surfers". But instead of cont
 
 ## Procedure
 First, you need to import the following library to Mbed studio project:  
+
 BSP: http://developer.mbed.org/teams/ST/code/BSP_B-L475E-IOT01/  
+
 DSP: https://os.mbed.com/teams/mbed-official/code/mbed-dsp  
+
 ism43362-driver: https://github.com/ARMmbed/wifi-ism43362/  
+
 Second, find the file with following path in the project folder:  
+
 mbed-dsp/CMSIS_dsp/TransformFunctions/arm_bitreversal2.S  
+
 Before line 43, add the following line:  
 ```
 #define __CC_ARM
