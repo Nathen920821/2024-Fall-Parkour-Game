@@ -66,7 +66,7 @@ First, open ``cmd/terminal`` and type ``pip install ursina`` to download Ursina.
 ###
 Game rules: Move the STM32 left, right, up, down and the character will follower the STM32 to do the corresponding motion. You have five lifes at the biginning, and your task is to dodge all kind of barriers such as trains, road blocks, and dragons (Notice that, dragon is 3 blocks wide, so you should move to the rightest or leftest rail to dodge it) and the speed will increase as your score get higher.There is an item looks like a white block with wings icom, if you get it you will fly to the sky for 5 second. Now, Try to earn more score before you are run over by train!
 ## Game Demo
-This is our demo video link:
+This is our demo video link: https://www.youtube.com/watch?v=3Y7QC3wof0M  
 
 
 
